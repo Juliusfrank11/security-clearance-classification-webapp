@@ -1,0 +1,11 @@
+venv/*
+src/data_preprocessing_unclean.ipynb
+src/temp_trainer/*
+src/cache_dir/*
+src/sentence_transformer_test.ipynb
+/src/__pycache__
+src/formal_finding_results_guideline_B_encoder/*
+src/data/formal_findings
+src/data/findings_of_fact
+src/data/text
+src/data/case_embeddings.csv
