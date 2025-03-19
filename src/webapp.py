@@ -47,16 +47,16 @@ st.sidebar.markdown("Use the options below to interact with the app.")
 # Cache the model training process
 @st.cache_resource
 def load_and_train_models():
-    if not os.path.exists("data/case_embeddings.csv"):
-        with py7zr.SevenZipFile("data/case_embeddings.7z", mode="r") as z:
-            z.extractall("data")
+    if not os.path.exists("src/data/case_embeddings.csv"):
+        with py7zr.SevenZipFile("src/data/case_embeddings.7z", mode="r") as z:
+            z.extractall("src/data")
     sf = SentenceTransformer("all-MiniLM-L6-v2")
     lr_models = {}
     lr_data = {}
     for letter in "ABCDEFGHIJKLM":
-        with open(f"models/lr_model_{letter}.pkl", "rb") as f:
+        with open(f"src/models/lr_model_{letter}.pkl", "rb") as f:
             lr_models[letter] = pkl.load(f)
-        lr_data[letter] = pd.read_csv(f"data/formal_finding_results_guideline_{letter}.csv", index_col=0).dropna()
+        lr_data[letter] = pd.read_csv(f"src/data/formal_finding_results_guideline_{letter}.csv", index_col=0).dropna()
     return sf, lr_models, lr_data
 
 # Load models and data
@@ -108,7 +108,7 @@ user_input = st.sidebar.text_area(
 # Function to process user input
 def process_user_text_input(user_input):
     st.subheader("🔗 Similar Cases and Appeal Results")
-    df = pd.read_csv("data/case_embeddings.csv", index_col=0)
+    df = pd.read_csv("src/data/case_embeddings.csv", index_col=0)
     for col in df.columns:
         df[col] = df[col].astype("float32")
 
