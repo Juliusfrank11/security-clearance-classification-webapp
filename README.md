@@ -1,5 +1,7 @@
 # security-clearance-classification
 Webapp for predicting US security clearance appeal outcomes.
+
+## [Run the Demo Here!](https://juliusfrank11-security-clearance-classificati-srcwebapp-oqbotw.streamlit.app/)
 ## Problem Description
 To safeguard its national security, the United States requires all personnel working with classified information to obtain a security clearance at one of three security levels: **CONFIDENTIAL**, **SECRET**, and **TOP SECRET** (**TS**). Additionally, almost all positions within the federal government require a *Public Trust* clearance, effectively making *Public Trust* a de facto "zeroth" clearance level. Security clearances are granted according to guidelines established by the Department of Defense. By law, if an applicant's security clearance is rejected, they must be issued a Statement of Reasons (SOR) detailing why their clearance application was rejected. The applicant can then choose to appeal the decision to the Defense Office of Hearings and Appeals (DOHA). These appeal cases are posted (with personal identifying information removed) on the [DOHA's Website](https://doha.ogc.osd.mil/Industrial-Security-Program/Industrial-Security-Clearance-Decisions/ISCR-Hearing-Decisions/).
 
