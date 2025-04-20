@@ -1,5 +1,5 @@
 # security-clearance-classification
-Webapp for predicting US security clearance appeal outcomes.
+Webapp for finding similar US security clearance appeal cases.
 
 ## [Run the Demo Here!](https://juliusfrank11-security-clearance-classificati-srcwebapp-oqbotw.streamlit.app/)
 ## Problem Description
@@ -9,9 +9,7 @@ This appeal process can be extremely costly, with one source citing a starting f
 
 ## Proposed Solution
 
-Luckily, from a modeling prospective, security clearance appeals present a simple problem compared to many legal judgement prediction models (LJP). In particular, statue requires one of 13 security clearance guidelines to be cited in the SOR issued to the applicant. This greatly reduces the complexity of LJP tasks by narrowing the possible reasons for an outcome. Additionally: appeals cases are handled by each guideline: meaning legal judgement is just the result of the logical `all` of each individual allogation: an applicant must mitigate all allogated security concerns to win the appeal. This structure allows for dividing the LJP task into discrete subtasks.
-
-This project aims to take advantage of this unique element of security clearance appeals by creating LJP models focused on explainablity. This would be used to help inform potential applicants of their likelihood of winning an appeals case before investing into an anttorny to argue their case. This is not meant to be used to replace judges as a provider of legal judgement or lawyers as a provider as legal advice: rather, it is an informed guess at an applicant's chances before the appeals process even begins.
+Luckily, from a modeling prospective, security clearance appeals present a simple problem compared to many legal document retrival cases. Because the reasons for rejection are so well-defined, cases are easily embeddable into a vector format. This project aims to take advantage of this unique element of security clearance appeals by a document retrival model focused on efficency and privacy. This would be used to help inform potential applicants of their likelihood of winning an appeals case before investing into an attorney to argue their case by allowing them to see similar cases 
 
 As a proof of concept, this project will create a web UI where applicants can enter details stated on their SOR and lookup similar cases to theirs and get a predictive statement of their chances of winning an appeal. 
 
@@ -19,7 +17,11 @@ As a proof of concept, this project will create a web UI where applicants can en
 ## Tech Stack
 The code for the application will be written exclusively in Python and use the following packages:
 - `pdfminer.six` used for reading pdf data
-- `sklearn` for developing logistic regression models to predict outcomes for each guideline
 - `sentence-transformers` for creation of embeddings
-- `transformers` for case summarization 
 - `streamlit` for display of the web application
+
+## How to run the webapp locally
+
+1. Clone this repo.
+2. Set up a virtual environment with python 3.11 or higher (`python3 -m venv venv`) and install packages (`pip install requirements.txt`)
+3. Use `streamlit run webapp.py` to run the webapp.
