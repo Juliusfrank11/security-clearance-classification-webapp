@@ -18,10 +18,11 @@ As a proof of concept, this project will create a web UI where applicants can en
 The code for the application will be written exclusively in Python and use the following packages:
 - `pdfminer.six` used for reading pdf data
 - `sentence-transformers` for creation of embeddings
+- `pandas` for implementation of quick computation and sorting of cased via cosine similarity
 - `streamlit` for display of the web application
 
 ## How to run the webapp locally
 
 1. Clone this repo.
 2. Set up a virtual environment with python 3.11 or higher (`python3 -m venv venv`) and install packages (`pip install requirements.txt`)
-3. Use `streamlit run webapp.py` to run the webapp.
+4. Use `streamlit run webapp.py` to run the webapp.
