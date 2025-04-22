@@ -9,7 +9,7 @@ This appeal process can be extremely costly, with one source citing a starting f
 
 ## Proposed Solution
 
-Luckily, from a modeling prospective, security clearance appeals present a simple problem compared to many legal document retrival cases. Because the reasons for rejection are so well-defined, cases are easily embeddable into a vector format. This project aims to take advantage of this unique element of security clearance appeals by a document retrival model focused on efficency and privacy. This would be used to help inform potential applicants of their likelihood of winning an appeals case before investing into an attorney to argue their case by allowing them to see similar cases 
+Luckily, from a modeling prospective, security clearance appeals present a simple problem compared to many legal document retrieval cases. Because the reasons for rejection are so well-defined, cases are easily embeddable into a vector format. This project aims to take advantage of this unique element of security clearance appeals by a document retrieval model focused on efficiency and privacy. This would be used to help inform potential applicants of their likelihood of winning an appeals case before investing into an attorney to argue their case by allowing them to see similar cases 
 
 As a proof of concept, this project will create a web UI where applicants can enter details stated on their SOR and lookup similar cases to theirs and get a predictive statement of their chances of winning an appeal. 
 
@@ -25,4 +25,4 @@ The code for the application will be written exclusively in Python and use the f
 
 1. Clone this repo.
 2. Set up a virtual environment with python 3.11 or higher (`python3 -m venv venv`) and install packages (`pip install requirements.txt`)
-4. Use `streamlit run webapp.py` to run the webapp.
+4. Use `streamlit run src/webapp.py` to run the webapp. Make sure you run it with the project root as your working directory.

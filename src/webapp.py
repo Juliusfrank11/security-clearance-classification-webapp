@@ -1,11 +1,7 @@
 import streamlit as st
 from sentence_transformers import SentenceTransformer
-from sklearn.linear_model import LogisticRegression
 import pandas as pd
 from utils import change_txt_filename_to_url
-import pickle as pkl
-import os
-import py7zr
 
 guideline_labels = {
     "A": "Allegiance to the United States",
@@ -44,25 +40,17 @@ st.markdown(
 st.sidebar.title("Navigation")
 st.sidebar.markdown("Use the options below to interact with the app.")
 
-# Cache the model training process
 @st.cache_resource
-def load_and_train_models():
-    if not os.path.exists("src/data/case_embeddings.csv"):
-        with py7zr.SevenZipFile("src/data/case_embeddings.7z", mode="r") as z:
-            z.extractall("src/data")
-    sf = SentenceTransformer("all-MiniLM-L6-v2")
-    lr_models = {}
-    lr_data = {}
+def load_appeal_results_data():
+    data = {}
     for letter in "ABCDEFGHIJKLM":
-        with open(f"src/models/lr_model_{letter}.pkl", "rb") as f:
-            lr_models[letter] = pkl.load(f)
-        lr_data[letter] = pd.read_csv(f"src/data/formal_finding_results_guideline_{letter}.csv", index_col=0).dropna()
-    return sf, lr_models, lr_data
-
+        data[letter] = pd.read_csv(f"src/data/formal_finding_results_guideline_{letter}.csv", index_col=0).dropna()
+    return data
 # Load models and data
-with st.spinner("Loading models..."):
-    sf, lr_models, lr_data = load_and_train_models()
-st.success("Models trained successfully!")
+
+sf = SentenceTransformer("all-MiniLM-L6-v2")
+data = load_appeal_results_data()
+
 
 
 # Example cases for each guideline
@@ -122,22 +110,14 @@ def process_user_text_input(user_input):
     # Display similar cases
     for url in similarity_series.index:
         st.markdown(f"**Case URL:** {url}")
-        for letter in lr_data.keys():
+        for letter in data.keys():
             try:
                 st.write(
                     f"**Guideline {letter} ({guideline_labels.get(letter)}):** "
-                    f"{'✅ Appeal Accepted' if lr_data[letter].loc[url][letter] else '❌ Appeal Denied'}"
+                    f"{'✅ Appeal Accepted' if data[letter].loc[url][letter] else '❌ Appeal Denied'}"
                 )
             except KeyError:
                 pass
-
-    # Display chances of successful appeal
-    st.subheader("📊 Chances of Successful Appeal")
-    for letter, model in lr_models.items():
-        st.write(
-            f"**Guideline {letter} ({guideline_labels.get(letter)}):** "
-            f"{model.predict_proba(user_input_embedding.reshape(1, -1))[0][1] * 100:.2f}%"
-        )
 
 if st.sidebar.button("Submit"):
     if user_input.strip():
