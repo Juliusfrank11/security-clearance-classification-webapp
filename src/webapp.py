@@ -1,6 +1,8 @@
 import streamlit as st
 from sentence_transformers import SentenceTransformer
 import pandas as pd
+import os
+import py7zr
 from utils import change_txt_filename_to_url
 
 guideline_labels = {
@@ -42,6 +44,9 @@ st.sidebar.markdown("Use the options below to interact with the app.")
 
 @st.cache_resource
 def load_appeal_results_data():
+    if not os.path.exists("src/data/case_embeddings.csv"):
+        with py7zr.SevenZipFile("src/data/case_embeddings.7z", mode="r") as z:
+            z.extractall("src/data")
     data = {}
     for letter in "ABCDEFGHIJKLM":
         data[letter] = pd.read_csv(f"src/data/formal_finding_results_guideline_{letter}.csv", index_col=0).dropna()
